@@ -1,7 +1,5 @@
 package principal;
 
-import static org.junit.Assert.*;
-
 import java.sql.SQLException;
 import java.util.List;
 
@@ -10,6 +8,7 @@ import org.junit.Test;
 
 import junit.framework.Assert;
 
+@SuppressWarnings("deprecation")
 public class ClienteDAOTest {
 
 	@Before

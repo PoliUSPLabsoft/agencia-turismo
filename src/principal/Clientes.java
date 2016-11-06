@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class Clientes
  */
-@WebServlet("/")
+@WebServlet("/Clientes")
 public class Clientes extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	ClienteDAO clienteDAO = new ClienteDAO();

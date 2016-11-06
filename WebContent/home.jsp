@@ -6,29 +6,19 @@
 	</head>
 	
 	<body>
-		<nav class="navbar navbar-default header">
-			<div class="col-sm-9">
+		<nav class="navbar navbar-default header page-header">
+			<div class="col-sm-9 right">
 				<h1>Agência de Turismo</h1>
 			</div>
 			<div class="col-sm-3">
 				<p>Bem vindo, Usuário <a href="#">(Sair)</a></p>
 			</div>
-		</nav>
-		<div class="row">
-			<div class="col-sm-12 content">
-				<img class="apresentacao" src="img/apresentacao.jpg">
-			</div>
-			<div class="panel panel-default menu-agencia">
-			  <div class="panel-body">
-				Basic panel example
-			  </div>
-			</div>
-		</div>	
+		</nav>	
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-3">
-					<nav class="col-sm-12 menu">
-						<nav class="navbar navbar-default">
+					<nav class="menu">
+						<nav class="navbar-default">
 							<h2>Menu</h2>
 						</nav>					
 						<ul>

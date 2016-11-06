@@ -15,12 +15,14 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/Detalhes")
 public class Detalhes extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	ClienteDAO clienteDAO;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
     public Detalhes() {
         super();
+        clienteDAO = new ClienteDAO();
         // TODO Auto-generated constructor stub
     }
 
@@ -31,7 +33,7 @@ public class Detalhes extends HttpServlet {
 		// TODO Auto-generated method stub
 		//Catalogo catalogo = new Catalogo();
 		int id = Integer.parseInt(request.getParameter("id"));
-		//Cliente cliente = catalogo.getClient(id);
+		Cliente cliente = clienteDAO.getClient(id);
 		//request.setAttribute("cliente", cliente);
 		RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/detalhes.jsp");
 		requestDispatcher.forward(request, response);
