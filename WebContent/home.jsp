@@ -22,7 +22,7 @@
 							<h2>Menu</h2>
 						</nav>					
 						<ul>
-							<li><a href="#">Comprar roteiro</a></li>
+							<li><a href="/CriarRoteiro">Criar roteiro</a></li>
 							<li><a href="#">Visualizar roteiros</a></li>
 							<li><a href="#">Comprar pacote de viagem</a></li>
 							<li><a href="#">Editar cadastro</a></li>

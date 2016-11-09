@@ -1,61 +1,75 @@
-*{
-	color : #282828;
+* {
+	color: #282828;
 }
 
-body{
+body {
 	background-color: #282828;
 }
 
-.right{
+.right {
 	text-align: right;
 }
 
 ul {
-  list-style-type: none;
+	list-style-type: none;
 }
 
-nav.header p{
-	margin-top : 40px;
+nav.header p {
+	margin-top: 40px;
 }
 
-nav.header a{
+nav.header a {
 	color: #282828;
 }
 
-nav.menu{
-	background-color : #6666CC;
+nav.menu {
+	background-color: #6666CC;
 }
 
-nav.menu *{
+nav.menu * {
 	padding: 0;
 	margin: 0;
 }
 
-nav.menu nav{
+nav.menu nav {
 	background-color: #9999CC;
 	color: #000000;
-	padding : 20px;
-	border-bottom: solid 2px #000000
+	padding: 15px;
+	padding-bottom: 20px;
+	border-bottom: solid 2px #000000;
 }
 
-nav.menu a{
-	padding: 5px;
-	display:block;
+nav.menu a {
+	padding: 7.5px;
+	display: block;
 	color: #FFFFFF;
 }
 
-nav.menu a:hover{
+nav.menu a:hover {
 	color: #282828;
 	background-color: #FFFFFF;
 	text-decoration: none;
 }
 
-nav.page-header{
+nav.page-header {
 	border: none;
-	margin-top:0;
-	background-color : #7378D8;
+	margin-top: 0;
+	background-color: #7378D8;
 }
 
-img.apresentacao{
+img.apresentacao {
+	border: solid 1px #505050;
 	width: 100%;
+}
+
+div.content {
+	background-color: #6666CC;
+}
+
+div.bloco_cidade {
+	background-color: #9999CC;
+	margin: 0.1%;
+	border: solid 10px #282828;
+	width: 32%;
+	height: 30%;
 }

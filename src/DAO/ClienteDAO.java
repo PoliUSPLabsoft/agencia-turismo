@@ -1,9 +1,11 @@
-package principal;
+package DAO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Cliente;
 
 public class ClienteDAO extends DAO{
 	
