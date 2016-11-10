@@ -17,6 +17,7 @@ public class ClienteDAO extends DAO{
 		return new Cliente(
 				resultSet.getInt("id"),
 				resultSet.getString("nome"),
+				resultSet.getInt("cidade_id"),
 				resultSet.getString("cpf"),
 				resultSet.getString("endereco"),
 				resultSet.getString("telefone"),
@@ -26,15 +27,18 @@ public class ClienteDAO extends DAO{
 
 	public List<Cliente> getClientes() throws SQLException{
 		List<Cliente> clientes = new ArrayList<>();
-	    ResultSet resultSet = statement.executeQuery("SELECT id, nome, cpf, endereco, telefone, genero FROM cliente");
+	    ResultSet resultSet = execute("SELECT id, nome, cpf, endereco, telefone, genero FROM cliente");
 		while(resultSet.next())
 			clientes.add(putCliente(resultSet));
 		return clientes;
 	}
 	
 	public Cliente getClientById(int id) throws SQLException{
-		ResultSet resultSet = statement.executeQuery("SELECT id, nome, cpf, endereco, telefone, genero FROM cliente WHERE id = " + id);
-		return putCliente(resultSet);
+		ResultSet resultSet = execute("SELECT id, nome, cpf, endereco, telefone, genero FROM cliente WHERE id = " + id);
+		if (resultSet.next())
+			return putCliente(resultSet);
+		else
+			return null;
 	}
 	
 	public void addCliente(Cliente e) throws SQLException{

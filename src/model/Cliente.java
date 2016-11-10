@@ -2,12 +2,13 @@ package model;
 
 
 public class Cliente {
-	private int id;
+	private int id, cidadeId;
 	private String  nome, cpf, endereco, telefone, genero;
 	
-	public Cliente(int id, String nome, String cpf, String endereco, String telefone, String genero) {
+	public Cliente(int id, String nome, int cidadeId, String cpf, String endereco, String telefone, String genero) {
 		this.id = id;
 		this.nome = nome;
+		this.cidadeId = cidadeId;
 		this.cpf = cpf;
 		this.endereco = endereco;
 		this.telefone = telefone;
@@ -20,6 +21,10 @@ public class Cliente {
 
 	public String getNome() {
 		return nome;
+	}
+	
+	public int getCidadeId() {
+		return cidadeId;
 	}
 
 	public String getCpf() {

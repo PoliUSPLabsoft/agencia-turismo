@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Cidade;
+import model.Cliente;
 import DAO.CidadeDAO;
+import DAO.ClienteDAO;
 
 /**
  * Servlet implementation class CriarRoteiro
@@ -34,12 +36,16 @@ public class CriarRoteiro extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		CidadeDAO cidadeDAO = new CidadeDAO();
+		ClienteDAO clienteDAO= new ClienteDAO();
+		CidadeDAO cidadeDAO = new CidadeDAO();	
 		List<Cidade> cidades;
 		String redirecionamento;
 		try {
+			Cliente cliente = new Cliente(400, "Samara", 1, "123", "123", "123", "Feminino");
+			Cidade cidadeNatal = cidadeDAO.getCidadeById(cliente.getCidadeId());
 			cidades = cidadeDAO.getCidades();
-			if (cidades != null){
+			if (cidadeNatal != null && cidades != null && cidades.size() > 0){
+				request.setAttribute("cidadeNatal", cidadeNatal);
 				request.setAttribute("cidades", cidades);
 				redirecionamento = "/jsp/criarRoteiro.jsp";
 			} else

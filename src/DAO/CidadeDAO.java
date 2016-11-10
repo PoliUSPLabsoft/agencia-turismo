@@ -20,10 +20,18 @@ public class CidadeDAO extends DAO{
 	
 	public List<Cidade> getCidades() throws SQLException{
 		List<Cidade> cidades = new ArrayList<>();
-	    ResultSet resultSet = statement.executeQuery("SELECT id, nome, avaliacao, descricao FROM cidade");
+	    ResultSet resultSet = execute("SELECT id, nome, avaliacao, descricao FROM cidade");
 		while(resultSet.next())
 			cidades.add(putCidade(resultSet));
 		return cidades;
+	}
+	
+	public Cidade getCidadeById(int id) throws SQLException{
+		ResultSet resultSet = execute("SELECT id, nome, avaliacao, descricao FROM cidade WHERE id = " + id);
+		if (resultSet.next())
+			return putCidade(resultSet);
+		else
+			return null;
 	}
 
 }

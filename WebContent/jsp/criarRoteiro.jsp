@@ -19,6 +19,8 @@
 		</nav>	
 		<div class="container">
 			<div class="content">
+				<%Cidade cidadeNatal =  ((Cidade) request.getAttribute("cidadeNatal"));%>
+				<h3> <%="Você está em:" + cidadeNatal.getNome() %></h3>
 				<h2>Escolha uma cidade:</h2>
 				<% List<Cidade> cidades = (List<Cidade>) request.getAttribute("cidades"); %>
 				<% if (cidades != null) {%>
@@ -32,6 +34,11 @@
 				<%} else {%>
 					<p>Nenhuma cidade encontrada!<p>
 				<% } %>
+				<form action="EscolheTransporte" method="POST">
+					<input type="hidden" name="cidadeNatal" value="<%=cidadeNatal.getId()%>">
+					<input type="text" name="cidades_escolhidas" />
+					<input type="submit" value="ok" />
+				</form>
 			</div>
 		</div>
 	</body>

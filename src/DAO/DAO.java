@@ -1,6 +1,7 @@
 package DAO;
 
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -19,5 +20,13 @@ public class DAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
+	}
+	
+	public ResultSet execute(String sql) throws SQLException{
+		ResultSet resultSet;
+		statement = connection.createStatement();
+		resultSet = statement.executeQuery(sql);
+		statement.close();
+		return resultSet;
 	}
 }
