@@ -33,8 +33,6 @@ INSERT INTO cliente(nome, password, cidade_id, cpf, endereco, telefone, genero) 
 INSERT INTO cliente(nome, password, cidade_id, cpf, endereco, telefone, genero) VALUES ("Marcela Gimenez", "123", 1, "050686409-34", "Rua Eng. Oscar Baidu, 877", "(90)2939-4566", "Feminino");
 INSERT INTO cliente(nome, password, cidade_id, cpf, endereco, telefone, genero) VALUES ("Ruan Crispaldo", "123", 2, "050.686.409-34", "Rua Eng. Oscar Baidu, 877", "(90)2939-4566", "Feminino");
 
-drop table transporte
-
 CREATE TABLE transporte(
 	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	cidade_from_id INT,
@@ -46,9 +44,23 @@ CREATE TABLE transporte(
 	preco INT
 );
 
-select * from transporte
-
 INSERT INTO transporte(cidade_from_id, cidade_to_id, nome, tipo, chegada, partida, preco) VALUES (1, 2, "STL-500", "Avião", "2016-11-13 13:54:00", "2016-11-14 13:54:00", 350);
 INSERT INTO transporte(cidade_from_id, cidade_to_id, nome, tipo, chegada, partida, preco) VALUES (2, 3, "Scania 900", "Ônibus", "2016-11-13 17:34:00", "2016-12-14 13:54:00", 400);
-INSERT INTO transporte(cidade_from_id, cidade_to_id, nome_id, tipo, chegada, partida, preco) VALUES (3, 1, "MSC-437", "Navio", "2016-11-13 12:00:00", "2016-12-15 13:00:00", 400);
+INSERT INTO transporte(cidade_from_id, cidade_to_id, nome, tipo, chegada, partida, preco) VALUES (3, 1, "MSC-437", "Navio", "2016-11-13 12:00:00", "2016-12-15 13:00:00", 400);
+
+CREATE TABLE hotel( 
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	cidade_id INT NOT NULL,
+	preco INT,
+	nome varchar(64),
+	avaliacao DECIMAL(3, 2),
+	descricao TEXT
+	);
+
+INSERT INTO hotel(cidade_id, preco, nome, avaliacao, descricao) VALUES (1, 500, "Itamar Franco", 9.7, "Hotel maravilhoso");
+INSERT INTO hotel(cidade_id, preco, nome, avaliacao, descricao) VALUES (1, 90, "Ibiramar", 4.7, "Hotel razoável");
+INSERT INTO hotel(cidade_id, preco, nome, avaliacao, descricao) VALUES (2, 300, "Ubirajara", 7.6, "Lindo despertar");
+INSERT INTO hotel(cidade_id, preco, nome, avaliacao, descricao) VALUES (2, 150, "Canto do pássaro", 6.9, "Café da manhã maravilhoso");
+INSERT INTO hotel(cidade_id, preco, nome, avaliacao, descricao) VALUES (3, 520, "Estalero", 9.6, "Extremamente receptivo");
+INSERT INTO hotel(cidade_id, preco, nome, avaliacao, descricao) VALUES (3, 400, "Cruzeiro do Sul", 5.0, "Sempre recomendado");
 

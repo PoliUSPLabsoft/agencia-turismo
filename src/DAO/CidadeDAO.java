@@ -9,6 +9,8 @@ import model.Cidade;
 
 public class CidadeDAO extends DAO{
 	
+	private final String SELECT_COMPLETE = "SELECT id, nome, avaliacao, descricao FROM cidade ";
+	
 	public Cidade putCidade(ResultSet resultSet) throws SQLException{
 		return new Cidade(
 				resultSet.getInt("id"),
@@ -20,14 +22,33 @@ public class CidadeDAO extends DAO{
 	
 	public List<Cidade> getCidades() throws SQLException{
 		List<Cidade> cidades = new ArrayList<>();
-	    ResultSet resultSet = execute("SELECT id, nome, avaliacao, descricao FROM cidade");
+	    ResultSet resultSet = execute(SELECT_COMPLETE);
 		while(resultSet.next())
 			cidades.add(putCidade(resultSet));
 		return cidades;
 	}
 	
+	public List<Cidade> getCidades(String[] ids) throws SQLException{
+		List<Cidade> cidades = new ArrayList<>();
+		if (ids.length > 0){
+			String sql = SELECT_COMPLETE + "WHERE id ";
+			if (ids.length == 1)
+				sql += "= " + ids[0];
+			else
+				sql += "IN (" + ids[0];
+				for(int i = 0; i < ids.length; i++)
+					sql += ", " + ids[i];
+				sql += ")";
+			ResultSet resultSet = execute(sql);
+			while(resultSet.next())
+				cidades.add(putCidade(resultSet));
+		}
+		return cidades;
+	}
+	
 	public Cidade getCidadeById(int id) throws SQLException{
-		ResultSet resultSet = execute("SELECT id, nome, avaliacao, descricao FROM cidade WHERE id = " + id);
+		String sql = SELECT_COMPLETE + "WHERE id = " + id;
+		ResultSet resultSet = execute(sql);
 		if (resultSet.next())
 			return putCidade(resultSet);
 		else

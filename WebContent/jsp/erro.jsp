@@ -19,7 +19,7 @@
 	</nav>
 	<div class="container">
 		<p>
-			<%=(StackTraceElement[])request.getAttribute("stackTrace")%>
+			<%=((Exception)request.getAttribute("erro")).printStackTrace()%>
 		</p>
 	</div>
 </body>

@@ -1,15 +1,16 @@
 package model;
 
 public class Transporte {
-	int id, cidade_from_id, cidade_to_id, preco;
+	int id, preco;
 	String nome, tipo, chegada, partida;
+	Cidade from, to;
 	
-	public Transporte(int id, int cidade_from_id, int cidade_to_id, int preco, String nome, String tipo, String chegada,
+	public Transporte(int id, Cidade from, Cidade to, int preco, String nome, String tipo, String chegada,
 			String partida) {
 		super();
 		this.id = id;
-		this.cidade_from_id = cidade_from_id;
-		this.cidade_to_id = cidade_to_id;
+		this.from = from;
+		this.to = to;
 		this.preco = preco;
 		this.nome = nome;
 		this.tipo = tipo;
@@ -21,12 +22,12 @@ public class Transporte {
 		return id;
 	}
 
-	public int getCidade_from_id() {
-		return cidade_from_id;
+	public Cidade getCidadeFrom() {
+		return from;
 	}
 
-	public int getCidade_to_id() {
-		return cidade_to_id;
+	public Cidade getCidadeTo() {
+		return to;
 	}
 
 	public int getPreco() {

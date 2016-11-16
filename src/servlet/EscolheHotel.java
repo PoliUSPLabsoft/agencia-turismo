@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -12,25 +13,27 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.websocket.Session;
 
+import DAO.CidadeDAO;
+import DAO.HotelDAO;
 import DAO.TransporteDAO;
-import model.Cidade;
+import model.Hotel;
+import model.Roteiro;
 import model.Transporte;
+import model.Cidade;
 
 /**
- * Servlet implementation class EscolheTransporte
+ * Servlet implementation class EscolheHotel
  */
-@WebServlet("/EscolheTransporte")
-public class EscolheTransporte extends HttpServlet {
+@WebServlet("/EscolheHotel")
+public class EscolheHotel extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EscolheTransporte() {
+    public EscolheHotel() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -45,21 +48,27 @@ public class EscolheTransporte extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		TransporteDAO transporteDAO = new TransporteDAO();
-		List<Transporte> transportes = new ArrayList<>();
+		List<Cidade> cidades = new ArrayList();
+		CidadeDAO cidadeDAO = new CidadeDAO();
+		HotelDAO hotelDAO = new HotelDAO();
 		String redirecionamento;
+		
+		Roteiro roteiro;
+		
 		try {
-			@SuppressWarnings("unchecked")
-			List<Cidade> cidades = (List<Cidade>)request.getSession().getAttribute("cidades");
-			for(int i = 1; i < cidades.size(); i++)
-				transportes.addAll((Collection<Transporte>) transporteDAO.getTransportes(cidades.get(i-1).getId(), cidades.get(i).getId()));
-			request.setAttribute("cidadeNatal", request.getParameter("cidadeNatal"));
-			request.setAttribute("transportes", transportes);
-			redirecionamento = "/jsp/transporte.jsp";
+			String cidadesText = request.getParameter("cidadeNatal") + ", " + request.getParameter("cidades_escolhidas");
+			
+			String ids[] = cidadesText.split(",");
+			
+			cidades = cidadeDAO.getCidades(ids);				
+			List<Hotel> hoteis = hotelDAO.getHoteisByItinerario(cidades);
+			
+			request.setAttribute("hoteis", hoteis);
+			
+			redirecionamento = "/jsp/hoteis.jsp";
 		} catch (SQLException e) {
 			e.printStackTrace();
-			request.setAttribute("stackTrace", e.getStackTrace());
+			request.setAttribute("erro", e);
 			redirecionamento = "/jsp/erro.jsp";
 		}
 		RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher(redirecionamento);

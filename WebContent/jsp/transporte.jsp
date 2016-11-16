@@ -20,7 +20,7 @@
 				<% List<Transporte> transportes = (List<Transporte>) request.getAttribute("transportes"); %>
 				<% if (transportes != null) {%>
 					<form action="Finalizar">
-						<p color="#FFFFFF">Total de <%=transportes.size()%> transportes</p>
+						<p>Total de <%=transportes.size()%> transportes</p>
 						<div class="col-sm-12 bloco_transporte">
 								<div class="col-sm-1 check"> Sel. </div>
 								<div class="col-sm-3 nome"> Nome</div>
@@ -30,7 +30,7 @@
 						<% for (Transporte i: transportes){ %>
 							<div class="col-sm-12 bloco_transporte">
 								<div class="col-sm-1 check">
-									<input type="checkbox" value=<%=i.getId()%>>
+									<input type="checkbox" name="<%=i.getId() %>" value="<%=i.getId()%>">
 								</div>
 								<div class="col-sm-3 nome"> <%=i.getNome() %></div>
 								<div class="col-sm-4 tipo"> <%=i.getTipo()%> </div>

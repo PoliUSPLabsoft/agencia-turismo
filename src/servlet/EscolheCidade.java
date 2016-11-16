@@ -19,14 +19,14 @@ import DAO.ClienteDAO;
 /**
  * Servlet implementation class CriarRoteiro
  */
-@WebServlet("/CriarRoteiro")
-public class CriarRoteiro extends HttpServlet {
+@WebServlet("/EscolheCidade")
+public class EscolheCidade extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CriarRoteiro() {
+    public EscolheCidade() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,19 +35,17 @@ public class CriarRoteiro extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		ClienteDAO clienteDAO= new ClienteDAO();
-		CidadeDAO cidadeDAO = new CidadeDAO();	
+		CidadeDAO cidadeDAO = new CidadeDAO();
 		List<Cidade> cidades;
 		String redirecionamento;
 		try {
-			Cliente cliente = new Cliente(400, "Samara", 1, "123", "123", "123", "Feminino");
+			Cliente cliente = (Cliente) request.getSession().getAttribute("cliente");
 			Cidade cidadeNatal = cidadeDAO.getCidadeById(cliente.getCidadeId());
 			cidades = cidadeDAO.getCidades();
 			if (cidadeNatal != null && cidades != null && cidades.size() > 0){
-				request.setAttribute("cidadeNatal", cidadeNatal);
+				request.getSession().setAttribute("cidadeNatal", cidadeNatal);
 				request.setAttribute("cidades", cidades);
-				redirecionamento = "/jsp/criarRoteiro.jsp";
+				redirecionamento = "/jsp/cidade.jsp";
 			} else
 				throw new SQLException("Nenhum resultado encontrado!!");
 		} catch (SQLException e) {
