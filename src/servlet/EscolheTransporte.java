@@ -21,7 +21,7 @@ import model.Transporte;
 /**
  * Servlet implementation class EscolheTransporte
  */
-@WebServlet("/EscolheTransporte")
+@WebServlet("/EscolheTransportes")
 public class EscolheTransporte extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -1,14 +1,13 @@
 <%@page import="model.Cliente"%>
-<%@page import="java.util.List, model.Cidade" %>
-<%@page contentType="text/html;charset=utf-8" %>
-
+<%@page import="java.util.List"%>
 <html>
 	<head>
-		<title>CriaÃ§Ã£o de Roteiro</title>			
-		<meta http-equiv = "Content-Language" content = "en"/>
-<meta http-equiv = "Content-Type" content="text/html; charset=utf-8">
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap/css/bootstrap.min.css"/>
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/global.css"/>
+		<title>Criação de Roteiro</title>
+		
+		
+		<link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="css/global.css"/>
+		<%@page import="java.util.List, model.Cidade" %>
 		
 	</head>
 	
@@ -21,7 +20,7 @@
 		<div class="container">
 			<div class="content">
 				<%Cidade cidadeNatal =  ((Cidade) request.getSession().getAttribute("cidadeNatal"));%>
-				<h3> <%="VocÃª estÃ¡ em:" + cidadeNatal.getNome() %></h3>
+				<h3> <%="Você está em:" + cidadeNatal.getNome() %></h3>
 				<h2>Escolha uma cidade:</h2>
 				<% List<Cidade> cidades = (List<Cidade>) request.getAttribute("cidades"); %>
 				<% if (cidades != null) {%>
@@ -36,7 +35,7 @@
 				<%} else {%>
 					<p>Nenhuma cidade encontrada!<p>
 				<% } %>
-				<form action="EscolheHotel" method="POST">
+				<form action="ConfigurarPacote" method="POST">
 					<input type="hidden" name="cidadeNatal" value="<%=cidadeNatal.getId()%>">
 					<input type="text" name="cidades_escolhidas" />
 					<input type="submit" value="ok" />

@@ -4,8 +4,8 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css"/>
-		<link rel="stylesheet" href="css/global.css"/>
+		<link rel="stylesheet" href="../css/bootstrap/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="../css/global.css"/>
 		<%@page import="java.util.List, model.Transporte" %>
 		<title>Escolha de Transporte</title>
 	</head>
