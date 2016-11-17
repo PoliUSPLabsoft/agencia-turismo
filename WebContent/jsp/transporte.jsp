@@ -19,7 +19,7 @@
 			<div class="content row">
 				<% List<Transporte> transportes = (List<Transporte>) request.getAttribute("transportes"); %>
 				<% if (transportes != null) {%>
-					<form action="Finalizar">
+					<form action="Finalizar" method = "POST">
 						<p>Total de <%=transportes.size()%> transportes</p>
 						<div class="col-sm-12 bloco_transporte">
 								<div class="col-sm-1 check"> Sel. </div>
@@ -27,10 +27,18 @@
 								<div class="col-sm-4 tipo"> Tipo </div>
 								<div class="col-sm-4 preco"> Preço </div>
 							</div>
+						<%int from = transportes.get(0).getCidadeFrom().getId(); %>
+						<%int to = transportes.get(0).getCidadeTo().getId(); %>
 						<% for (Transporte i: transportes){ %>
+							<%if (i.getCidadeFrom().getId() != from || i.getCidadeTo().getId() != to) {
+								from = i.getCidadeFrom().getId();
+								to = i.getCidadeTo().getId(); %>
+								<h2>De <%=from %> para <%=to %> :</h2>
+							<% }%>
+							
 							<div class="col-sm-12 bloco_transporte">
 								<div class="col-sm-1 check">
-									<input type="checkbox" name="<%=i.getId() %>" value="<%=i.getId()%>">
+									<input type="radio" name="<%=from %>, <%=to %>" value="<%=i.getId()%>">
 								</div>
 								<div class="col-sm-3 nome"> <%=i.getNome() %></div>
 								<div class="col-sm-4 tipo"> <%=i.getTipo()%> </div>

@@ -1,12 +1,14 @@
 package model;
 
-public class Hotel {
-	int id;
+import java.io.Serializable;
+
+public class Hotel implements Serializable{
+	Integer id;
 	String cidade;
-	int cidadeId;
+	Integer cidadeId;
 	String nome;
-	float avaliacao;
-	int preco;
+	Float avaliacao;
+	Integer preco;
 	String descricao;
 	
 	public Hotel(int id,String cidade,int cidadeId, int preco, String nome, float avaliacao, String descricao) {

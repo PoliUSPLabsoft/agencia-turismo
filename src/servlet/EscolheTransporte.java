@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -16,6 +17,7 @@ import javax.websocket.Session;
 
 import DAO.TransporteDAO;
 import model.Cidade;
+import model.Roteiro;
 import model.Transporte;
 
 /**
@@ -24,6 +26,7 @@ import model.Transporte;
 @WebServlet("/EscolheTransportes")
 public class EscolheTransporte extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private Roteiro roteiro;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -45,13 +48,19 @@ public class EscolheTransporte extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+				
 		TransporteDAO transporteDAO = new TransporteDAO();
 		List<Transporte> transportes = new ArrayList<>();
 		String redirecionamento;
 		try {
-			@SuppressWarnings("unchecked")
-			List<Cidade> cidades = (List<Cidade>)request.getSession().getAttribute("cidades");
+			String exemplo = (String)request.getSession().getAttribute("exemplo");
+			roteiro = (Roteiro)request.getSession().getAttribute("roteiro2");
+			Enumeration<String> hotelIds = request.getAttributeNames();
+			while(hotelIds.hasMoreElements()){
+				int idx = Integer.parseInt(hotelIds.nextElement());
+				roteiro.getHospedagem().put(roteiro.getCidades().get(idx), roteiro.getHotelById(Integer.parseInt((String)request.getAttribute(idx+""))));
+			}
+			List<Cidade> cidades = roteiro.getCidades();
 			for(int i = 1; i < cidades.size(); i++)
 				transportes.addAll((Collection<Transporte>) transporteDAO.getTransportes(cidades.get(i-1).getId(), cidades.get(i).getId()));
 			request.setAttribute("cidadeNatal", request.getParameter("cidadeNatal"));

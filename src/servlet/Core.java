@@ -35,6 +35,10 @@ public class Core extends HttpServlet {
 		Cliente cliente = new Cliente(400, "Samara", 1, "123", "123", "123", "Feminino");
 		request.getSession().setAttribute("cliente", cliente);
 		
+		Roteiro roteiro = new Roteiro(cliente);
+		request.getSession().setAttribute("roteiro", roteiro);
+		request.getSession().setAttribute("exemplo", "teste01");
+		
 		RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/home.jsp");
 		requestDispatcher.forward(request, response);
 	}

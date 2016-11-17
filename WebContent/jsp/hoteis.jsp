@@ -21,7 +21,7 @@
 				<% List<Hotel> hoteis = (List<Hotel>) request.getAttribute("hoteis"); %>
 				<% if (hoteis != null) {%>
 					<%Set<String> visitadas = new HashSet<String>(); %>
-					<form action="EscolheTransportes" method = "post">
+					<form action="EscolheTransporte" method = "post">
 						<%for (Hotel hotel: hoteis) {%>
 								<%if (!visitadas.contains(hotel.getCidade())) {%>
 									<%visitadas.add(hotel.getCidade()); %>
