@@ -1,8 +1,8 @@
 <html>
 	<head>
 		<title> Agência de turismo</title>
-		<link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css"/>
-		<link rel="stylesheet" href="css/global.css"/>
+		<link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="/css/global.css"/>
 		<%@page import="java.util.List, model.Cliente" %>
 	</head>
 	
@@ -31,7 +31,7 @@
 					</nav>
 				</div>
 				<div class="col-sm-9 content">
-					<img class="apresentacao" src="img/apresentacao.jpg">
+					<img class="apresentacao" src="/img/apresentacao.jpg">
 				</div>	
 				<div class="col-sm-9">
 				</div>

@@ -1,13 +1,16 @@
 package model;
 
-public class Cidade {
+import java.io.Serializable;
+
+public class Cidade implements Serializable{
 	
-	int id;
+	Integer id;
 	String nome;
-	float avaliacao;
+	Float avaliacao;
 	String descricao;
 	Transporte chegada, partida;
 	Hotel hotel;
+	Integer nDias;
 	
 	public Cidade(int id, String nome, float avaliacao, String descricao) {
 		super();
@@ -56,4 +59,26 @@ public class Cidade {
 	public void setHotel(Hotel hotel) {
 		this.hotel = hotel;
 	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public void setAvaliacao(float avaliacao) {
+		this.avaliacao = avaliacao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public void setnDias(int nDias) {
+		this.nDias = nDias;
+	}
+	
+	
 }
