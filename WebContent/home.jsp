@@ -1,8 +1,8 @@
 <html>
 	<head>
 		<title> Agência de turismo</title>
-		<link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css"/>
-		<link rel="stylesheet" href="/css/global.css"/>
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/global.css"/>
 		<%@page import="java.util.List, model.Cliente" %>
 	</head>
 	
@@ -24,14 +24,14 @@
 						</nav>					
 						<ul>
 							<li><a href="EscolheCidade">Criar roteiro</a></li>
-							<li><a href="#"></a></li>
+							<li><a href="ConfigurarPacote">Vender pacote</a></li>
 							<li><a href="#"></a></li>
 							<li><a href="#"></a></li>
 						</ul>
 					</nav>
 				</div>
 				<div class="col-sm-9 content">
-					<img class="apresentacao" src="/img/apresentacao.jpg">
+					<img class="apresentacao" src="${pageContext.request.contextPath}/img/apresentacao.jpg">
 				</div>	
 				<div class="col-sm-9">
 				</div>

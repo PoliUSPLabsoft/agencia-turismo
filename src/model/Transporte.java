@@ -7,6 +7,22 @@ public class Transporte implements Serializable{
 	String nome, tipo, chegada, partida;
 	Cidade from, to;
 	
+	public Cidade getFrom() {
+		return from;
+	}
+
+	public void setFrom(Cidade from) {
+		this.from = from;
+	}
+
+	public Cidade getTo() {
+		return to;
+	}
+
+	public void setTo(Cidade to) {
+		this.to = to;
+	}
+
 	public Transporte(int id, Cidade from, Cidade to, int preco, String nome, String tipo, String chegada,
 			String partida) {
 		super();

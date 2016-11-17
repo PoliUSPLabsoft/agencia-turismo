@@ -1,9 +1,12 @@
 package model;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+
+import DAO.TransporteDAO;
 
 public class Roteiro implements Serializable {
 	Integer id;
@@ -80,6 +83,15 @@ public class Roteiro implements Serializable {
 			if(hotel.getId() == k)
 				return hotel;
 		return null;
+	}
+	
+	public void setTransporte(String[] ids, int valor) throws SQLException{
+		TransporteDAO transporteDAO = new TransporteDAO();
+		Transporte transporte = transporteDAO.getTransporteById(valor);
+		transporte.setFrom(getCidadeById(Integer.parseInt(ids[0].trim())));
+		transporte.setTo(getCidadeById(Integer.parseInt(ids[1].trim())));
+		
+		transportes.add(transporte);
 	}
 	
 }

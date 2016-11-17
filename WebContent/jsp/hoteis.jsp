@@ -5,15 +5,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css"/>
-<link rel="stylesheet" href="css/global.css"/>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/global.css"/>
 <%@page import="java.util.List, java.util.Set, java.util.HashSet, model.Hotel" %>
 <title>Seleção de hoteis</title>
 </head>
 	<body>
 		<nav class="navbar navbar-default header page-header">
 			<div class="col-sm-9 right">
-				<h1>Escolha de Transporte</h1>
+				<h1>Escolha de Hotel</h1>
 			</div>
 		</nav>	
 		<div class="container">
@@ -21,13 +21,13 @@
 				<% List<Hotel> hoteis = (List<Hotel>) request.getAttribute("hoteis"); %>
 				<% if (hoteis != null) {%>
 					<%Set<String> visitadas = new HashSet<String>(); %>
-					<form action="EscolheTransporte" method = "post">
+					<form action="EscolheTransportes" method = "post">
 						<%for (Hotel hotel: hoteis) {%>
 								<%if (!visitadas.contains(hotel.getCidade())) {%>
 									<%visitadas.add(hotel.getCidade()); %>
 									<h2><%=hotel.getCidade() %></h2>
 								<%} %>
-								<input type="radio" name = "<%=hotel.getId() %>" value = "<%=hotel.getId()%>">
+								<input type="radio" name = "<%=hotel.getCidadeId() %>" value = "<%=hotel.getId()%>">
 								<%=hotel.getNome() %><br>					
 						<%} %>
 						<input type="submit" value = "OK">

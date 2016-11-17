@@ -3,7 +3,6 @@ package servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Enumeration;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Hotel;
+import DAO.TransporteDAO;
 import model.Roteiro;
 
 /**
@@ -47,11 +46,12 @@ public class Finalizar extends HttpServlet {
 			Enumeration<String> transportesIds = request.getAttributeNames();
 			Roteiro roteiro = (Roteiro) request.getSession().getAttribute("roteiro2");
 			while(transportesIds.hasMoreElements()){
-				String[] ids = transportesIds.nextElement().split(",| ");
-				
+				String idList = transportesIds.nextElement();
+				String[] ids = idList.split(",| ");
+				roteiro.setTransporte(ids, (int)request.getAttribute(idList));
 			}
-			
-			redirecionamento = "/jsp/hoteis.jsp";
+			throw new SQLException("dsds");
+			//redirecionamento = "/jsp/hoteis.jsp";
 		} catch (SQLException e) {
 			e.printStackTrace();
 			request.setAttribute("erro", e);

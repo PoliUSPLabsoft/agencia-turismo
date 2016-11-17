@@ -8,6 +8,14 @@ public class Hotel implements Serializable{
 	Integer cidadeId;
 	String nome;
 	Float avaliacao;
+	public Integer getCidadeId() {
+		return cidadeId;
+	}
+
+	public void setCidadeId(Integer cidadeId) {
+		this.cidadeId = cidadeId;
+	}
+
 	Integer preco;
 	String descricao;
 	

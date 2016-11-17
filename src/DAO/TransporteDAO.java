@@ -33,4 +33,10 @@ public class TransporteDAO extends DAO {
 		}
 		return transportes;
 	}
+	public Transporte getTransporteById(int id) throws SQLException{
+		ResultSet resultSet = execute("SELECT * FROM transporte WHERE id = " + id);
+		if (resultSet.next())
+			return putTransporte(resultSet);
+		return null;
+	}
 }
