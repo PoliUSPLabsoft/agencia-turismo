@@ -64,3 +64,34 @@ INSERT INTO hotel(cidade_id, preco, nome, avaliacao, descricao) VALUES (2, 150, 
 INSERT INTO hotel(cidade_id, preco, nome, avaliacao, descricao) VALUES (3, 520, "Estalero", 9.6, "Extremamente receptivo");
 INSERT INTO hotel(cidade_id, preco, nome, avaliacao, descricao) VALUES (3, 400, "Cruzeiro do Sul", 5.0, "Sempre recomendado");
 
+CREATE TABLE roteiro(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	cliente_id int
+	);
+
+INSERT INTO roteiro (cliente_id) VALUES (1);
+INSERT INTO roteiro (cliente_id) VALUES (10);
+
+CREATE TABLE estadia(
+	roteiro_id int,
+	cidade_id int,
+	posicao int
+	);
+
+INSERT INTO estadia (roteiro_id, cidade_id, posicao) VALUES(1, 1, 0);
+INSERT INTO estadia (roteiro_id, cidade_id, posicao) VALUES(1, 2, 1);
+INSERT INTO estadia (roteiro_id, cidade_id, posicao) VALUES(1, 3, 2);
+INSERT INTO estadia (roteiro_id, cidade_id, posicao) VALUES(1, 4, 3);
+
+CREATE TABLE viagem(
+	roteiro_id int,
+	cidade_from int,
+	cidade_to int,
+	transporte_id int
+	);
+
+CREATE TABLE hospedagem(
+	roteiro_id int,
+	posicao int,
+	hotelid int
+	);
