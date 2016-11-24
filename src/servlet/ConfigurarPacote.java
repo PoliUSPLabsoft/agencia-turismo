@@ -87,7 +87,7 @@ public class ConfigurarPacote extends HttpServlet {
 				List<Hotel> hoteisDessaCidade = hotelDAO.getHoteisByCidadeId(cidade.getId());
 				hoteisDisponiveis.put(cidade, hoteisDessaCidade);
 				int nextCidadeId;
-				nextCidadeId = cidades.indexOf(cidade) == cidades.size() - 1 ? 0 : cidades.indexOf(cidade)+1;cidades.indexOf(cidade)+1;
+				nextCidadeId = cidades.indexOf(cidade) == cidades.size() - 1 ? 0 : cidades.indexOf(cidade)+1;
 				List<Transporte> transportesDessaCidade = transporteDAO.getTransportes(cidade.getId(), cidades.get(nextCidadeId).getId());
 				transportesDisponiveis.put(cidade, transportesDessaCidade);
 			}

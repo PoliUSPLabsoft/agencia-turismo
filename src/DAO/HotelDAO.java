@@ -62,4 +62,10 @@ public class HotelDAO extends DAO {
 			list.add(getHoteisByCidadeId(i.getId()));
 		return list;
 	}
+
+	public Hotel getHotelById(int hotelId) throws SQLException {
+		String sql = "SELECT * FROM hotel WHERE id = " + hotelId;
+		ResultSet resultSet = execute(sql);
+		return this.putHotel(resultSet);
+	}
 }
