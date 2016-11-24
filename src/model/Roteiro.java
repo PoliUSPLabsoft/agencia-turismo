@@ -9,17 +9,14 @@ import java.util.List;
 import DAO.TransporteDAO;
 
 public class Roteiro implements Serializable {
+	private static final long serialVersionUID = -7121797199679360740L;
 	Integer id;
 	Cliente cliente;
 	List<Cidade> cidades;
 	List<Hotel> hoteis;
 	List<String> cidadeIds;
 	List<Transporte> transportes;
-	HashMap<Cidade, Hotel> hospedagem;
-	
-	public Roteiro(Cliente cliente){
-		this.cliente = cliente;
-	}
+	HashMap<Cidade, Hotel> hospedagem;	
 	
 	public void setId(int id) {
 		this.id = id;
