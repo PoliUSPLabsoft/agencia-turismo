@@ -24,7 +24,7 @@
 						</nav>					
 						<ul>
 							<li><a href="EscolheCidade">Criar roteiro</a></li>
-							<li><a href="ConfigurarPacote">Vender pacote</a></li>
+							<li><a href="VenderPacote">Vender pacote</a></li>
 							<li><a href="#"></a></li>
 							<li><a href="#"></a></li>
 						</ul>

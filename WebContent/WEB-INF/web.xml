@@ -5,7 +5,7 @@
     <welcome-file>Core</welcome-file>
   </welcome-file-list>
   <mime-mapping>
-  	<extension>css</extension>
-  	<mime-type>text/css</mime-type>
+    <extension>css</extension>
+    <mime-type>text/css</mime-type>
   </mime-mapping>
 </web-app>

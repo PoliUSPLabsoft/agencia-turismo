@@ -12,6 +12,15 @@ import model.Transporte;
 
 public class RoteiroDAO extends DAO {
 	
+	public List<Roteiro> getRoteiros() throws SQLException{
+		List<Roteiro> roteiros = new ArrayList<>();
+		ResultSet resultSet = execute("SELECT id FROM roteiro");
+		while(resultSet.next()){
+			roteiros.add(getRoteiroById(Integer.parseInt(resultSet.getString("id"))));
+		}
+		return roteiros;
+	}
+	
 	
 	public Roteiro getRoteiroById(int id) throws SQLException {
 		CidadeDAO cidadeDAO = new CidadeDAO();
