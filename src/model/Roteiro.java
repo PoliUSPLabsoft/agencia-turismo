@@ -16,7 +16,7 @@ public class Roteiro implements Serializable {
 	List<Hotel> hoteis;
 	List<String> cidadeIds;
 	List<Transporte> transportes;
-	HashMap<Cidade, Hotel> hospedagem;	
+	HashMap<Cidade, Hotel> hospedagem;
 	
 	public void setId(int id) {
 		this.id = id;
@@ -89,6 +89,15 @@ public class Roteiro implements Serializable {
 		transporte.setTo(getCidadeById(Integer.parseInt(ids[1].trim())));
 		
 		transportes.add(transporte);
+	}
+	
+	public int getPreco(){
+		int preco = 0;
+		for(Hotel hotel: hoteis)
+			preco += hotel.getPreco() * hotel.getNdias();
+		for (Transporte transporte: transportes)
+			preco += transporte.getPreco();		
+		return preco;
 	}
 	
 }

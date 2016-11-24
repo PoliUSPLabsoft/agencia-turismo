@@ -13,20 +13,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import DAO.RoteiroDAO;
 import model.Cliente;
-import model.Hotel;
 import model.Roteiro;
 
 /**
- * Servlet implementation class VenderRoteiro
+ * Servlet implementation class MostrarRoteiro
  */
-@WebServlet("/VenderRoteiro")
-public class VenderRoteiro extends HttpServlet {
+@WebServlet("/MostrarRoteiro")
+public class MostrarRoteiro extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public VenderRoteiro() {
+    public MostrarRoteiro() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,18 +34,24 @@ public class VenderRoteiro extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String redirecionamento;
-			
+		
 		RoteiroDAO roteiroDAO = new RoteiroDAO();
 		
 		
 		try {
-			Cliente cliente = (Cliente) request.getSession().getAttribute("cliente");
-			List<Roteiro> roteiros = roteiroDAO.getRoteiros();
+			Integer id = (Integer) request.getAttribute("id");
+			Roteiro roteiro = roteiroDAO.getRoteiroById(id);
 			
-			request.setAttribute("cliente", cliente);
-			request.setAttribute("roteiros", roteiros);
-			request.getSession().setAttribute("roteiros", roteiros);
+			request.setAttribute("roteiro", roteiro);
 			
 			redirecionamento = "/jsp/hoteis.jsp";
 		} catch (SQLException e) {
@@ -56,14 +61,6 @@ public class VenderRoteiro extends HttpServlet {
 		}
 		RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher(redirecionamento);
 		requestDispatcher.forward(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

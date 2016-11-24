@@ -66,8 +66,7 @@ INSERT INTO hotel(cidade_id, preco, nome, avaliacao, descricao) VALUES (3, 400, 
 
 CREATE TABLE roteiro(
 	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	nome varchar (128);
-	cliente_id int
+	nome varchar (128)
 	);
 
 INSERT INTO roteiro (cliente_id) VALUES (1);
