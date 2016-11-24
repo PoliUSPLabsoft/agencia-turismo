@@ -18,6 +18,12 @@ public class RoteiroDAO extends DAO {
 		TransporteDAO transporteDAO = new TransporteDAO();
 		HotelDAO hotelDAO = new HotelDAO();
 		Roteiro roteiro = new Roteiro();
+		
+		roteiro.setId(id);
+		String roteiroSql = "SELECT * FROM roteiro WHERE id = " + id;
+		String roteiroName = execute(roteiroSql).getString("nome");
+		roteiro.setName(roteiroName);
+		
 		String estadiaSql = "SELECT id_cidade FROM estadia WHERE id_roteiro = " + id + " ORDER BY order ASC";
 		ResultSet resultSet = execute(estadiaSql);
 		List<String> cidadesIds = new ArrayList<String>();
