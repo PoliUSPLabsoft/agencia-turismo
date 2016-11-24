@@ -60,4 +60,21 @@ public class RoteiroDAO extends DAO {
 		
 		return roteiro;
 		}
+
+	public List<Roteiro> getRoteiros() throws SQLException {
+		String sql = "SELECT id FROM roteiro";
+		ResultSet resultSet = execute(sql);
+		
+		List<String> roteirosId = new ArrayList<>();
+		List<Roteiro> roteiros = new ArrayList<>();
+		while(resultSet.next()) {
+			roteirosId.add(resultSet.getString("id"));
+		}
+		
+		for(String roteiroId : roteirosId) {
+			Roteiro roteiro = this.getRoteiroById(new Integer(roteiroId));
+			roteiros.add(roteiro);
+		}
+		return roteiros;
 	}
+}

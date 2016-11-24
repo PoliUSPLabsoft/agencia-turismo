@@ -66,7 +66,7 @@ INSERT INTO hotel(cidade_id, preco, nome, avaliacao, descricao) VALUES (3, 400, 
 
 CREATE TABLE roteiro(
 	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	cliente_id int
+	nome varchar (128)
 	);
 
 INSERT INTO roteiro (cliente_id) VALUES (1);
@@ -93,5 +93,5 @@ CREATE TABLE viagem(
 CREATE TABLE hospedagem(
 	roteiro_id int,
 	posicao int,
-	hotelid int
+	hotel_id int
 	);

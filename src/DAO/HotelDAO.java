@@ -10,7 +10,7 @@ import model.Hotel;
 
 public class HotelDAO extends DAO {
 	
-	private final String SELECT_COMPLETE = "SELECT h.id, h.cidade_id, c.nome AS cidade_nome, h.preco, h.nome, h.avaliacao, h.descricao "
+	private final String SELECT_COMPLETE = "SELECT h.id, h.cidade_id, c.nome AS cidade_nome, h.preco, h.nome, h.avaliacao, h.descricao, h.ndias "
 			+ "FROM hotel h "
 			+ "INNER JOIN cidade c "
 			+ "ON h.cidade_id = c.id ";			
@@ -23,8 +23,9 @@ public class HotelDAO extends DAO {
 		String nome = resultSet.getString("nome");
 		float avaliacao = resultSet.getFloat("avaliacao");
 		String descricao = resultSet.getString("descricao");
+		Integer ndias = resultSet.getInt("ndias");
 		
-		return new Hotel(id, cidade, cidadeId, preco, nome, avaliacao, descricao);
+		return new Hotel(id, cidade, cidadeId, preco, nome, avaliacao, descricao, ndias);
 	}
 	
 	public List<Hotel> getHoteisByCidadeId(int idCidade) throws SQLException {

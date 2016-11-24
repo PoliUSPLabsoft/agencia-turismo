@@ -98,4 +98,13 @@ public class Roteiro implements Serializable {
 		this.name = name;
 	}
 	
+	public int getPreco(){
+		int preco = 0;
+		for(Hotel hotel: hoteis)
+			preco += hotel.getPreco() * hotel.getNdias();
+		for (Transporte transporte: transportes)
+			preco += transporte.getPreco();		
+		return preco;
+	}
+	
 }

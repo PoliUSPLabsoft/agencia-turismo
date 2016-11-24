@@ -8,6 +8,8 @@ public class Hotel implements Serializable{
 	Integer cidadeId;
 	String nome;
 	Float avaliacao;
+	Integer ndias;
+	
 	public Integer getCidadeId() {
 		return cidadeId;
 	}
@@ -19,7 +21,7 @@ public class Hotel implements Serializable{
 	Integer preco;
 	String descricao;
 	
-	public Hotel(int id,String cidade,int cidadeId, int preco, String nome, float avaliacao, String descricao) {
+	public Hotel(int id,String cidade,int cidadeId, int preco, String nome, float avaliacao, String descricao, Integer ndias) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -28,25 +30,17 @@ public class Hotel implements Serializable{
 		this.cidade = cidade;
 		this.cidadeId = cidadeId;
 		this.preco = preco;
+		this.ndias = ndias;
 	}
 
-	/**
-	 * @return the id
-	 */
 	public int getId() {
 		return id;
 	}
 
-	/**
-	 * @return the cidade
-	 */
 	public String getCidade() {
 		return cidade;
 	}
 
-	/**
-	 * @return the nome
-	 */
 	public String getNome() {
 		return nome;
 	}
@@ -58,19 +52,16 @@ public class Hotel implements Serializable{
 		return avaliacao;
 	}
 
-	/**
-	 * @return the preco
-	 */
 	public int getPreco() {
 		return preco;
 	}
 
-	/**
-	 * @return the descricao
-	 */
 	public String getDescricao() {
 		return descricao;
 	}
-	
+
+	public Integer getNdias() {
+		return ndias;
+	}
 	
 }
