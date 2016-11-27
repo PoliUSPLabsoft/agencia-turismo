@@ -18,6 +18,7 @@ public class Roteiro implements Serializable {
 	List<Transporte> transportes;
 	HashMap<Cidade, Hotel> hospedagem;
 	String name;
+	FormaPagamento formaPagamento;
 	
 	public String getName() {
 		return name;

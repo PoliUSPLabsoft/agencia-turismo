@@ -15,7 +15,7 @@ import model.Roteiro;
 /**
  * Servlet implementation class Core
  */
-@WebServlet("/Core")
+@WebServlet("/")
 public class Core extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

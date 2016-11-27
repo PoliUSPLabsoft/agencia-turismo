@@ -19,7 +19,7 @@ import model.Roteiro;
 /**
  * Servlet implementation class VenderRoteiro
  */
-@WebServlet("/VenderRoteiro")
+@WebServlet("/VenderPacote")
 public class VenderRoteiro extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -48,7 +48,7 @@ public class VenderRoteiro extends HttpServlet {
 			request.setAttribute("roteiros", roteiros);
 			request.getSession().setAttribute("roteiros", roteiros);
 			
-			redirecionamento = "/jsp/hoteis.jsp";
+			redirecionamento = "/jsp/fkVenderPacotes - EscolherPacote.jsp";
 		} catch (SQLException e) {
 			e.printStackTrace();
 			request.setAttribute("erro", e);

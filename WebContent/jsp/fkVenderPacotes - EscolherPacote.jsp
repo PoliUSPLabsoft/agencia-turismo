@@ -25,12 +25,10 @@
 					<div class="list-group">
 				<% if (roteiros != null) {%>
 					<% for (Roteiro r: roteiros) { %>
-					  <a href="#" class="list-group-item">
 						<h4 class="list-group-item-heading"><%= r.getName() %></h4>
     					<p class="list-group-item-text">  
-    						<input type="radio" name="roteiro-id" value="<%=r.getId()%>"/>
+    						<input type="radio" name="id" value="<%=r.getId()%>"/>
     					</p>
-    				  </a>
 					<% } %>
 				<%} else {%>
 					<p>Nenhum pacote encontrado!</p>
