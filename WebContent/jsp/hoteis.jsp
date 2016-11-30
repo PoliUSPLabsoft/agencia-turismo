@@ -21,13 +21,15 @@
 				<% List<Hotel> hoteis = (List<Hotel>) request.getAttribute("hoteis"); %>
 				<% if (hoteis != null) {%>
 					<%Set<String> visitadas = new HashSet<String>(); %>
-					<form action="EscolheTransportes" method = "post">
+					<form action="EscolheTransportes" method = "POST">
+						<% int i = 0, city = 0; %>
 						<%for (Hotel hotel: hoteis) {%>
-								<%if (!visitadas.contains(hotel.getCidade())) {%>
-									<%visitadas.add(hotel.getCidade()); %>
+								<%if (city != hotel.getCidadeId()) {%>
+									<%city = hotel.getCidadeId(); %>
+									<%i++; %>
 									<h2><%=hotel.getCidade() %></h2>
 								<%} %>
-								<input type="radio" name = "<%=hotel.getCidadeId() %>" value = "<%=hotel.getId()%>">
+								<input type="radio" name = "<%=i %>" value = "<%=hotel.getId()%>">
 								<%=hotel.getNome() %><br>					
 						<%} %>
 						<input type="submit" value = "OK">

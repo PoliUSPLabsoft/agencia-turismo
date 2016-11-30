@@ -27,18 +27,19 @@
 								<div class="col-sm-4 tipo"> Tipo </div>
 								<div class="col-sm-4 preco"> Preço </div>
 							</div>
-						<%int from = transportes.get(0).getCidadeFrom().getId(); %>
-						<%int to = transportes.get(0).getCidadeTo().getId(); %>
+						<%int from = -1, k = -1;%>
+						<%int to = -1; %>
 						<% for (Transporte i: transportes){ %>
 							<%if (i.getCidadeFrom().getId() != from || i.getCidadeTo().getId() != to) {
 								from = i.getCidadeFrom().getId();
-								to = i.getCidadeTo().getId(); %>
-								<h2>De <%=from %> para <%=to %> :</h2>
+								to = i.getCidadeTo().getId(); 
+								k++;%>
+								<h2>De <%=i.getCidadeFrom().getNome() %> para <%=i.getCidadeTo().getNome() %> :</h2>
 							<% }%>
 							
 							<div class="col-sm-12 bloco_transporte">
 								<div class="col-sm-1 check">
-									<input type="radio" name="<%=from %>, <%=to %>" value="<%=i.getId()%>">
+									<input type="radio" name="<%=k %>, <%=k+1 %>" value="<%=i.getId()%>">
 								</div>
 								<div class="col-sm-3 nome"> <%=i.getNome() %></div>
 								<div class="col-sm-4 tipo"> <%=i.getTipo()%> </div>

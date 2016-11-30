@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +20,13 @@ public class Roteiro implements Serializable {
 	HashMap<Cidade, Hotel> hospedagem;
 	String name;
 	FormaPagamento formaPagamento;
+	
+	public Roteiro(){
+		this.cidades = new ArrayList<>();
+		this.hoteis = new ArrayList<>();
+		this.cidadeIds = new ArrayList<>();
+		this.transportes = new ArrayList<>();
+	}
 	
 	public String getName() {
 		return name;
@@ -87,11 +95,12 @@ public class Roteiro implements Serializable {
 		return null;
 	}
 	
-	public void setTransporte(String[] ids, int valor) throws SQLException{
-		TransporteDAO transporteDAO = new TransporteDAO();
-		Transporte transporte = transporteDAO.getTransporteById(valor);
-		transporte.setFrom(getCidadeById(Integer.parseInt(ids[0].trim())));
-		transporte.setTo(getCidadeById(Integer.parseInt(ids[1].trim())));
+	public void setTransporte(int[] ids, int valor) throws SQLException{
+		Transporte transporte = (new TransporteDAO()).getTransporteById(valor);
+		transporte.setFrom(cidades.get(ids[0]));
+		transporte.setTo(cidades.get(ids[1]));
+		cidades.get(ids[0]).setPartida(transporte);
+		cidades.get(ids[1]).setChegada(transporte);
 		
 		transportes.add(transporte);
 	}

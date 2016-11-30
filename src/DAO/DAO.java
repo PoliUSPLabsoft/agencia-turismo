@@ -9,6 +9,8 @@ public class DAO {
 	java.sql.Connection connection;
 	Statement statement;
 	
+	protected String SELECT_COMPLETE;
+	
 	public DAO(){
 		try{
 			Class.forName("org.mariadb.jdbc.Driver");

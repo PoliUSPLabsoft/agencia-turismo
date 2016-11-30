@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import model.Cidade;
 import model.Cliente;
 import DAO.CidadeDAO;
-import DAO.ClienteDAO;
 
 /**
  * Servlet implementation class CriarRoteiro
@@ -40,10 +39,11 @@ public class EscolheCidade extends HttpServlet {
 		String redirecionamento;
 		try {
 			Cliente cliente = (Cliente) request.getSession().getAttribute("cliente");
-			Cidade cidadeNatal = cidadeDAO.getCidadeById(cliente.getCidadeId());
-			cidades = cidadeDAO.getCidades();
-			if (cidadeNatal != null && cidades != null && cidades.size() > 0){
-				request.getSession().setAttribute("cidadeNatal", cidadeNatal);
+			Cidade cidadeNatal = (new CidadeDAO()).getCidadeById(cliente.getCidadeId());
+			request.getSession().setAttribute("cidadeNatal", cidadeNatal);
+			cidades = cidadeDAO.getCidadesExcept(cidadeNatal.getId());
+			
+			if (cidades != null && cidades.size() > 0){
 				request.setAttribute("cidades", cidades);
 				redirecionamento = "/jsp/cidade.jsp";
 			} else

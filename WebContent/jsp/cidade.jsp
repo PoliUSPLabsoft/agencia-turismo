@@ -22,6 +22,7 @@
 			<div class="content">
 				<%Cidade cidadeNatal =  ((Cidade) request.getSession().getAttribute("cidadeNatal"));%>
 				<h3> <%="Você está em:" + cidadeNatal.getNome() %></h3>
+				<h2>Digite o nome do roteiro:</h2><input type="text" name="nomeRoteiro"/>
 				<h2>Escolha uma cidade:</h2>
 				<% List<Cidade> cidades = (List<Cidade>) request.getAttribute("cidades"); %>
 				<% if (cidades != null) {%>

@@ -81,4 +81,56 @@ public class RoteiroDAO extends DAO {
 		}
 		return roteiros;
 	}
+	
+	public void salvaRoteiro(Roteiro roteiro) throws SQLException{
+		ResultSet resultSet;
+		int id;
+		
+		String sql = "INSERT INTO roteiro(cliente_id, nome)"
+				+ "VALUES(" + roteiro.getCliente().getId() + ", "
+				+ roteiro.getName();
+		
+		execute(sql);
+		
+		sql = "SELECT id FROM roteiro WHERE cliente_id = " + roteiro.getCliente().getId()
+				+ " AND nome = " + roteiro.getName();
+		
+		resultSet = execute(sql);
+		if(!resultSet.next())
+			throw new SQLException("Erro na gravação na tabela 'roteiro'");
+		
+		id = resultSet.getInt("id");
+		
+		//Inserção na tabela 'estadia'
+		sql = "";
+		Cidade cidade = roteiro.getCidades().get(0);
+		Transporte transporte;
+		int i = 0;
+		while (cidade.getPartida() != null){
+			sql += "INSERT INTO estadia (roteiro_id, cidade_id, posicao)"
+					+ " VALUES ( " + id 
+					+ ", " + roteiro.getCidades().get(i)
+					+ ", " + i + ";\n";
+		
+			sql += "INSERT INTO hospedagem (roteiro_id, posicao, hotel_id, dias)"
+					+ " VALUES ( " + id 
+					+ ", " + i
+					+ ", " + roteiro.getCidades().get(i).getHotel().getId()
+					+ ", " + roteiro.getCidades().get(i).getHotel().getNdias()
+					+ ";\n";
+			
+			transporte = cidade.getPartida();
+			
+			sql += "INSERT INTO viagem (roteiro_id, cidade_from, cidade_to, transporte_id)"
+					+ " VALUES ( " + id 
+					+ ", " + transporte.getCidadeFrom().getId()
+					+ ", " + transporte.getCidadeTo().getId()
+					+ ", " + transporte.getId()
+					+ ";\n";
+			
+			cidade = transporte.getTo();
+			
+		} execute(sql);
+		
+	}
 }

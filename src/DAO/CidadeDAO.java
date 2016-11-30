@@ -28,6 +28,15 @@ public class CidadeDAO extends DAO{
 		return cidades;
 	}
 	
+	public List<Cidade> getCidadesExcept(int id) throws SQLException{
+		List<Cidade> cidades = new ArrayList<>();
+	    ResultSet resultSet = execute(SELECT_COMPLETE + "WHERE id <> " + id);
+		while(resultSet.next())
+			cidades.add(putCidade(resultSet));
+		return cidades;
+	}
+	
+	
 	public List<Cidade> getCidades(String[] ids) throws SQLException{
 		List<Cidade> cidades = new ArrayList<>();
 		if (ids.length > 0){
@@ -36,12 +45,13 @@ public class CidadeDAO extends DAO{
 				sql += "= " + ids[0];
 			else
 				sql += "IN (" + ids[0];
-				for(int i = 0; i < ids.length; i++)
+				for(int i = 1; i < ids.length; i++)
 					sql += ", " + ids[i];
 				sql += ")";
 			ResultSet resultSet = execute(sql);
 			while(resultSet.next())
 				cidades.add(putCidade(resultSet));
+			cidades.add(cidades.get(0));
 		}
 		return cidades;
 	}

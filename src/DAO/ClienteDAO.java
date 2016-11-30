@@ -9,8 +9,10 @@ import model.Cliente;
 
 public class ClienteDAO extends DAO{
 	
+	
 	public ClienteDAO(){
 		super();
+		this.SELECT_COMPLETE = "SELECT id, nome, cidade_id, cpf, endereco, telefone, genero FROM cliente";
 	}
 	
 	public Cliente putCliente (ResultSet resultSet) throws SQLException{
@@ -27,14 +29,14 @@ public class ClienteDAO extends DAO{
 
 	public List<Cliente> getClientes() throws SQLException{
 		List<Cliente> clientes = new ArrayList<>();
-	    ResultSet resultSet = execute("SELECT id, nome, cpf, endereco, telefone, genero FROM cliente");
+	    ResultSet resultSet = execute(SELECT_COMPLETE);
 		while(resultSet.next())
 			clientes.add(putCliente(resultSet));
 		return clientes;
 	}
 	
 	public Cliente getClientById(int id) throws SQLException{
-		ResultSet resultSet = execute("SELECT id, nome, cpf, endereco, telefone, genero FROM cliente WHERE id = " + id);
+		ResultSet resultSet = execute(SELECT_COMPLETE + " WHERE id = " + id);
 		if (resultSet.next())
 			return putCliente(resultSet);
 		else

@@ -13,11 +13,6 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
-		<attributes>
-			<attribute name="owner.project.facets" value="java"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/annotations-api.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/catalina-ant.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/catalina-ha.jar"/>
@@ -44,5 +39,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/tomcat-util.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/tomcat-websocket.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/websocket-api.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

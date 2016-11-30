@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Enumeration;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.TransporteDAO;
+import DAO.RoteiroDAO;
+import model.Cidade;
+import model.Cliente;
 import model.Roteiro;
 
 /**
@@ -42,16 +45,25 @@ public class Finalizar extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RoteiroDAO roteiroDAO = new RoteiroDAO();
 		try {
-			Enumeration<String> transportesIds = request.getAttributeNames();
-			Roteiro roteiro = (Roteiro) request.getSession().getAttribute("roteiro2");
-			while(transportesIds.hasMoreElements()){
-				String idList = transportesIds.nextElement();
-				String[] ids = idList.split(",| ");
-				roteiro.setTransporte(ids, (int)request.getAttribute(idList));
+			Roteiro roteiro = new Roteiro();
+			roteiro.setCliente((Cliente) request.getSession().getAttribute("cliente"));
+			List<Cidade> cidades = (List<Cidade>) request.getSession().getAttribute("cidades");
+			roteiro.setCidades(cidades);
+			for(int i = 0; i < cidades.size() - 1; i++){
+				int[] ids = {i, i+1};
+				String atributo = i + ", " + (i+1);
+				String param = (String) request.getParameter(atributo);
+				int id = Integer.parseInt(param);
+				roteiro.setTransporte(ids, id);
 			}
-			throw new SQLException("dsds");
-			//redirecionamento = "/jsp/hoteis.jsp";
+			String nomeRoteiro = (String) request.getSession().getAttribute("nomeRoteiro");
+			roteiro.setName(nomeRoteiro);
+			roteiroDAO.salvaRoteiro(roteiro);
+			
+			request.setAttribute("roteiro", roteiro);
+			redirecionamento = "/jsp/mostrarRoteiro.jsp";
 		} catch (SQLException e) {
 			e.printStackTrace();
 			request.setAttribute("erro", e);

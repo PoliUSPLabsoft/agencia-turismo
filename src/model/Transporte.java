@@ -1,8 +1,6 @@
 package model;
 
-import java.io.Serializable;
-
-public class Transporte implements Serializable{
+public class Transporte{
 	Integer id, preco;
 	String nome, tipo, chegada, partida;
 	Cidade from, to;

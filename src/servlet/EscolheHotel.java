@@ -3,8 +3,6 @@ package servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -16,11 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import DAO.CidadeDAO;
 import DAO.HotelDAO;
-import DAO.TransporteDAO;
 import model.Hotel;
 import model.Roteiro;
-import model.Transporte;
 import model.Cidade;
+import model.Cliente;
 
 /**
  * Servlet implementation class EscolheHotel
@@ -48,37 +45,33 @@ public class EscolheHotel extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Cidade> cidades = new ArrayList();
+		List<Cidade> cidades = new ArrayList<>();
 		CidadeDAO cidadeDAO = new CidadeDAO();
 		HotelDAO hotelDAO = new HotelDAO();
 		String redirecionamento;
 		
-		Roteiro roteiro;
-		
-		
+		Roteiro roteiro;		
 		try {
-			String cidadesText = request.getParameter("cidadeNatal") + ", " + request.getParameter("cidades_escolhidas");
+			Cliente cliente = (Cliente) request.getSession().getAttribute("cliente");
+			Cidade cidadeNatal = cidadeDAO.getCidadeById(cliente.getCidadeId());
+			String cidadesText = cidadeNatal.getId() + 
+					" " + request.getParameter("cidades_escolhidas") +
+					" " + cidadeNatal.getId();
 			
-			String ids[] = cidadesText.split(",");
+			String nomeRoteiro = request.getParameter("nomeRoteiro");
+			request.getSession().setAttribute("nomeRoteiro", nomeRoteiro);
 			
-			roteiro = (Roteiro) request.getSession().getAttribute("roteiro");
-			
-			
-			request.getSession(true).setAttribute("exemplo", "teste02");
-			request.getSession().removeAttribute("roteiro");
-			
-			roteiro.setCidadeIds(ids);
+			String ids[] = cidadesText.split("(,| )");
 			
 			cidades = cidadeDAO.getCidades(ids);
-			roteiro.setCidades(cidades);
-			List<Hotel> hoteis = hotelDAO.getHoteisByItinerario(cidades);
+			request.getSession().setAttribute("cidades", cidades);
 			
-			request.getSession().setAttribute("hoteis", hoteis);
-			roteiro.setHoteis(hoteis);
+			cidades.remove(0); //Removendo cidades natal;
+			cidades.remove(cidades.size() - 1);
 			
+			List<Hotel> hoteis = hotelDAO.getHoteisByItinerario(cidades);			
+			request.getSession().setAttribute("hoteis", hoteis);			
 			request.setAttribute("hoteis", hoteis);
-			
-			request.getSession().setAttribute("roteiro2", roteiro);
 			
 			redirecionamento = "/jsp/hoteis.jsp";
 		} catch (SQLException e) {

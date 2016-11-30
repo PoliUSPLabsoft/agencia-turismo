@@ -13,11 +13,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.websocket.Session;
-
+import DAO.HotelDAO;
 import DAO.TransporteDAO;
 import model.Cidade;
-import model.Roteiro;
+import model.Hotel;
 import model.Transporte;
 
 /**
@@ -26,7 +25,6 @@ import model.Transporte;
 @WebServlet("/EscolheTransportes")
 public class EscolheTransporte extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private Roteiro roteiro;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -50,21 +48,25 @@ public class EscolheTransporte extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				
 		TransporteDAO transporteDAO = new TransporteDAO();
+		HotelDAO hotelDAO = new HotelDAO();
 		List<Transporte> transportes = new ArrayList<>();
 		String redirecionamento;
 		try {
-			String exemplo = (String)request.getSession().getAttribute("exemplo");
-			roteiro = (Roteiro)request.getSession().getAttribute("roteiro2");
-			Enumeration<String> hotelIds = request.getAttributeNames();
-			while(hotelIds.hasMoreElements()){
-				int idx = Integer.parseInt(hotelIds.nextElement());
-				roteiro.getHospedagem().put(roteiro.getCidades().get(idx), roteiro.getHotelById(Integer.parseInt((String)request.getAttribute(idx+""))));
+			List<Cidade> cidades = (List<Cidade>) request.getSession().getAttribute("cidades");
+			Cidade cidadeNatal = (Cidade) request.getSession().getAttribute("cidadeNatal");
+			cidades.add(0, cidadeNatal);
+			for (int i = 1; i < cidades.size(); i++){
+				String id_s = (String)request.getParameter(i+"");
+				int id = Integer.parseInt(id_s);
+				Hotel atual = hotelDAO.getHotelById(id);
+				cidades.get(i).setHotel(atual);
 			}
-			List<Cidade> cidades = roteiro.getCidades();
+			cidades.add(cidades.size(), cidadeNatal);
+			request.getSession().setAttribute("cidades", cidades);
 			for(int i = 1; i < cidades.size(); i++)
 				transportes.addAll((Collection<Transporte>) transporteDAO.getTransportes(cidades.get(i-1).getId(), cidades.get(i).getId()));
-			request.setAttribute("cidadeNatal", request.getParameter("cidadeNatal"));
 			request.setAttribute("transportes", transportes);
+			request.setAttribute("cidades", cidades);
 			redirecionamento = "/jsp/transporte.jsp";
 		} catch (SQLException e) {
 			e.printStackTrace();

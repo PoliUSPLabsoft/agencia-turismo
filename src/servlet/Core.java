@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,13 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DAO.ClienteDAO;
 import model.Cliente;
-import model.Roteiro;
 
 /**
  * Servlet implementation class Core
  */
-@WebServlet("/")
+@WebServlet("/Core")
 public class Core extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -32,14 +33,14 @@ public class Core extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Substituir por login		
-		Cliente cliente = new Cliente(400, "Samara", 1, "123", "123", "123", "Feminino");
-		request.getSession().setAttribute("cliente", cliente);
-		
-		Roteiro roteiro = new Roteiro();
-		roteiro.setCliente(cliente);
-		
-		request.getSession().setAttribute("roteiro", roteiro);
-		//request.getSession().setAttribute("exemplo", "teste01");
+		Cliente cliente;
+		try {
+			cliente = (new ClienteDAO()).getClientById(2);
+			request.getSession().setAttribute("cliente", cliente);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/home.jsp");
 		requestDispatcher.forward(request, response);

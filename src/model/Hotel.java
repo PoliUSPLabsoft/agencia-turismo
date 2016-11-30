@@ -1,8 +1,6 @@
 package model;
 
-import java.io.Serializable;
-
-public class Hotel implements Serializable{
+public class Hotel{
 	Integer id;
 	String cidade;
 	Integer cidadeId;
