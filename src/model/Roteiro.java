@@ -13,6 +13,7 @@ public class Roteiro implements Serializable {
 	private static final long serialVersionUID = -7121797199679360740L;
 	Integer id;
 	Cliente cliente;
+	Cidade cidadeNatal;
 	List<Cidade> cidades;
 	List<Hotel> hoteis;
 	List<String> cidadeIds;
@@ -81,6 +82,14 @@ public class Roteiro implements Serializable {
 		this.hoteis = hoteis;
 	}
 	
+	public Cidade getCidadeNatal() {
+		return cidadeNatal;
+	}
+
+	public void setCidadeNatal(Cidade cidadeNatal) {
+		this.cidadeNatal = cidadeNatal;
+	}
+
 	public Cidade getCidadeById(int k){
 		for(Cidade cidade: cidades)
 			if(cidade.getId() == k)
@@ -116,5 +125,12 @@ public class Roteiro implements Serializable {
 			preco += transporte.getPreco();		
 		return preco;
 	}
-	
+
+	public FormaPagamento getFormaPagamento() {
+		return formaPagamento;
+	}
+
+	public void setFormaPagamento(FormaPagamento formaPagamento) {
+		this.formaPagamento = formaPagamento;
+	}	
 }

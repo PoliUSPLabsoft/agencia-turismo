@@ -83,17 +83,19 @@ public class RoteiroDAO extends DAO {
 	}
 	
 	public void salvaRoteiro(Roteiro roteiro) throws SQLException{
+		String sql;
+		List<String> queries = new ArrayList<>();
 		ResultSet resultSet;
 		int id;
 		
-		String sql = "INSERT INTO roteiro(cliente_id, nome)"
-				+ "VALUES(" + roteiro.getCliente().getId() + ", "
-				+ roteiro.getName();
+		sql = "INSERT INTO roteiro(cliente_id, nome, forma_pagamento) "
+				+ "VALUES(" + roteiro.getCliente().getId() + ", '"
+				+ roteiro.getName() + "', null);";
 		
 		execute(sql);
 		
-		sql = "SELECT id FROM roteiro WHERE cliente_id = " + roteiro.getCliente().getId()
-				+ " AND nome = " + roteiro.getName();
+		sql = "SELECT MAX(id) AS id FROM roteiro WHERE cliente_id = " + roteiro.getCliente().getId()
+				+ " AND nome = '" + roteiro.getName() + "';";
 		
 		resultSet = execute(sql);
 		if(!resultSet.next())
@@ -105,32 +107,42 @@ public class RoteiroDAO extends DAO {
 		sql = "";
 		Cidade cidade = roteiro.getCidades().get(0);
 		Transporte transporte;
-		int i = 0;
-		while (cidade.getPartida() != null){
-			sql += "INSERT INTO estadia (roteiro_id, cidade_id, posicao)"
+		for (int i = 0; i < roteiro.getCidades().size(); i++){
+			
+			
+			 queries.add("INSERT INTO estadia (roteiro_id, cidade_id, posicao)"
 					+ " VALUES ( " + id 
-					+ ", " + roteiro.getCidades().get(i)
-					+ ", " + i + ";\n";
-		
-			sql += "INSERT INTO hospedagem (roteiro_id, posicao, hotel_id, dias)"
-					+ " VALUES ( " + id 
-					+ ", " + i
-					+ ", " + roteiro.getCidades().get(i).getHotel().getId()
-					+ ", " + roteiro.getCidades().get(i).getHotel().getNdias()
-					+ ";\n";
+					+ ", " + roteiro.getCidades().get(i).getId()
+					+ ", " + i + ");\n");
+			
+			if (cidade.getId() != roteiro.getCidadeNatal().getId())
+				queries.add("INSERT INTO hospedagem (roteiro_id, posicao, hotel_id, dias)"
+						+ " VALUES ( " + id 
+						+ ", " + i
+						+ ", " + roteiro.getCidades().get(i).getHotel().getId()
+						+ ", " + roteiro.getCidades().get(i).getHotel().getNdias().intValue()
+						+ ");\n");
 			
 			transporte = cidade.getPartida();
 			
-			sql += "INSERT INTO viagem (roteiro_id, cidade_from, cidade_to, transporte_id)"
-					+ " VALUES ( " + id 
-					+ ", " + transporte.getCidadeFrom().getId()
-					+ ", " + transporte.getCidadeTo().getId()
-					+ ", " + transporte.getId()
-					+ ";\n";
+			if (i != roteiro.getCidades().size() - 1)
+				queries.add("INSERT INTO viagem (roteiro_id, cidade_from, cidade_to, transporte_id)"
+						+ " VALUES ( " + id 
+						+ ", " + i
+						+ ", " + (i+1)
+						+ ", " + transporte.getId()
+						+ ");\n");
 			
 			cidade = transporte.getTo();
 			
-		} execute(sql);
+		} batch(queries);
 		
+	}
+	
+	public void setFormaPagamento(Roteiro roteiro) throws SQLException{
+		String sql = "UPDATE TABLE roteiro"
+				+ " SET forma_pagamento = " + roteiro.getFormaPagamento().getId()
+				+ " WHERE id = " + roteiro.getId() + ";";
+		execute(sql);
 	}
 }

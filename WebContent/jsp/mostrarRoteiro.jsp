@@ -23,21 +23,23 @@
 			<div class="content">
 				<table>
 					<tr><td>Tipo</td><td>Nome</td><td>Preço</td><td colspan="2">Descrição</td></tr>
-					<%for (Hotel i: roteiro.getHoteis()) {%>
-						<tr>
-							<td>Hospedagem</td>
-							<td><%=i.getNome() %></td>
-							<td><%=i.getPreco() %>,00</td>
-							<td colspan="2"><%=i.getDescricao() %></td>
-						</tr>
+					<%for (Cidade i: roteiro.getCidades()) {%>
+						<%if (i.getHotel() != null) { %>
+							<tr>
+								<td>Hospedagem</td>
+								<td><%=i.getHotel().getNome() %></td>
+								<td><%=i.getHotel().getPreco() %>,00</td>
+								<td colspan="2"><%=i.getHotel().getDescricao() %></td>
+							</tr>
+						<%} %>
 					<%} %>
 					<%for (Transporte j: roteiro.getTransportes()) {%>
 						<tr>
-							<td>Hospedagem</td>
+							<td>Transporte</td>
 							<td><%=j.getNome() %></td>
 							<td><%=j.getPreco() %>,00</td>
-							<td><%=j.getCidadeFrom() %></td>
-							<td><%=j.getCidadeTo() %></td>
+							<td><%=j.getCidadeFrom().getNome() %></td>
+							<td><%=j.getCidadeTo().getNome() %></td>
 						</tr>
 					<%} %>
 						<tr>
@@ -47,7 +49,7 @@
 						
 				<form method="POST" action="RegistraCompraRoteiro">
 				<label>Forma de pagamento:</label>
-				<select>
+				<select name="formaPagamento">
 					<%for (FormaPagamento pgto: FormaPagamento.values()) {%>
 						<option value = "<%=pgto.getId()%>"><%=pgto.getNome() %></option>
 					<%} %>

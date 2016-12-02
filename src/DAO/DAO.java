@@ -4,6 +4,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 public class DAO {
 	java.sql.Connection connection;
@@ -30,5 +31,13 @@ public class DAO {
 		resultSet = statement.executeQuery(sql);
 		statement.close();
 		return resultSet;
+	}
+	
+	public void batch(List<String> queries) throws SQLException{
+		statement = connection.createStatement();
+		for(String sql: queries)
+			statement.addBatch(sql);
+		statement.executeBatch();
+		statement.close();
 	}
 }

@@ -58,7 +58,7 @@ public class EscolheHotel extends HttpServlet {
 					" " + request.getParameter("cidades_escolhidas") +
 					" " + cidadeNatal.getId();
 			
-			String nomeRoteiro = request.getParameter("nomeRoteiro");
+			String nomeRoteiro = (String) request.getParameter("nomeRoteiro");
 			request.getSession().setAttribute("nomeRoteiro", nomeRoteiro);
 			
 			String ids[] = cidadesText.split("(,| )");

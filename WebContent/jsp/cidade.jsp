@@ -22,12 +22,11 @@
 			<div class="content">
 				<%Cidade cidadeNatal =  ((Cidade) request.getSession().getAttribute("cidadeNatal"));%>
 				<h3> <%="Você está em:" + cidadeNatal.getNome() %></h3>
-				<h2>Digite o nome do roteiro:</h2><input type="text" name="nomeRoteiro"/>
 				<h2>Escolha uma cidade:</h2>
 				<% List<Cidade> cidades = (List<Cidade>) request.getAttribute("cidades"); %>
 				<% if (cidades != null) {%>
 					<% for (Cidade i: cidades){ %>
-						<div class="col-sm-4 bloco_cidade">
+						<div class="bloco_cidade">
 							<div class="col-sm-1 id"> <%=i.getId() %></div>
 							<div class="col-sm-5 nome"> <%=i.getNome() %></div>
 							<div class="col-sm-6 avaliacao"> <%=i.getAvaliacao()%> </div>
@@ -40,6 +39,7 @@
 				<form action="EscolheHotel" method="POST">
 					<input type="hidden" name="cidadeNatal" value="<%=cidadeNatal.getId()%>">
 					<input type="text" name="cidades_escolhidas" />
+					<h2>Digite o nome do roteiro:</h2><input type="text" name="nomeRoteiro"/>
 					<input type="submit" value="ok" />
 				</form>
 			</div>
