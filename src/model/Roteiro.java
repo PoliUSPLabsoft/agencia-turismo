@@ -20,7 +20,7 @@ public class Roteiro implements Serializable {
 	List<Transporte> transportes;
 	HashMap<Cidade, Hotel> hospedagem;
 	String name;
-	FormaPagamento formaPagamento;
+	int formaPagamento;
 	
 	public Roteiro(){
 		this.cidades = new ArrayList<>();
@@ -126,11 +126,11 @@ public class Roteiro implements Serializable {
 		return preco;
 	}
 
-	public FormaPagamento getFormaPagamento() {
+	public int getFormaPagamento() {
 		return formaPagamento;
 	}
 
-	public void setFormaPagamento(FormaPagamento formaPagamento) {
+	public void setFormaPagamento(int formaPagamento) {
 		this.formaPagamento = formaPagamento;
 	}	
 }

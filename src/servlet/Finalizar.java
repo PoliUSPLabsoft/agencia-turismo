@@ -49,8 +49,11 @@ public class Finalizar extends HttpServlet {
 		RoteiroDAO roteiroDAO = new RoteiroDAO();
 		try {
 			Roteiro roteiro = (Roteiro) request.getSession().getAttribute("roteiro");
-			FormaPagamento formaPagamento = FormaPagamento.valueOf(request.getParameter("formaPagamento"));
-			redirecionamento = "/jsp/mostrarRoteiro.jsp";
+			int formaPagamento = Integer.parseInt((String)request.getParameter("formaPagamento"));
+			roteiro.setFormaPagamento(formaPagamento);
+			roteiroDAO.setFormaPagamento(roteiro);
+			request.getSession().invalidate();
+			redirecionamento = "/";
 		} catch (SQLException e) {
 			e.printStackTrace();
 			request.setAttribute("erro", e);

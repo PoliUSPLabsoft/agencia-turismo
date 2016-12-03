@@ -1,5 +1,5 @@
 <%@page import="model.Cliente"%>
-<%@page import="java.util.List, model.Cidade, model.Roteiro, model.Hotel, model.Transporte, model.FormaPagamento" %>
+<%@page import="java.util.List, model.Cidade, model.Roteiro, model.Hotel, model.Transporte, model.FormaPagamento, java.util.Map, java.util.Map.Entry" %>
 <%@page contentType="text/html;charset=utf-8" %>
 
 <html>
@@ -47,11 +47,12 @@
 							<td colspan = "2"> <%=roteiro.getPreco() %></td>
 						</tr>
 						
-				<form method="POST" action="RegistraCompraRoteiro">
+				<form method="POST" action="Finalizar">
 				<label>Forma de pagamento:</label>
 				<select name="formaPagamento">
-					<%for (FormaPagamento pgto: FormaPagamento.values()) {%>
-						<option value = "<%=pgto.getId()%>"><%=pgto.getNome() %></option>
+					<%FormaPagamento k = new FormaPagamento(); %>
+					<%for (Entry<Integer, String> pgto: k.getEntries()) {%>
+						<option value = "<%=pgto.getKey()%>"><%=pgto.getValue() %></option>
 					<%} %>
 				</select>
 				<input type="submit" value="Enviar">

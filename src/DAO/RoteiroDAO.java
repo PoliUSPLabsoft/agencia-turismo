@@ -103,6 +103,8 @@ public class RoteiroDAO extends DAO {
 		
 		id = resultSet.getInt("id");
 		
+		roteiro.setId(id);
+		
 		//Inserção na tabela 'estadia'
 		sql = "";
 		Cidade cidade = roteiro.getCidades().get(0);
@@ -140,8 +142,8 @@ public class RoteiroDAO extends DAO {
 	}
 	
 	public void setFormaPagamento(Roteiro roteiro) throws SQLException{
-		String sql = "UPDATE TABLE roteiro"
-				+ " SET forma_pagamento = " + roteiro.getFormaPagamento().getId()
+		String sql = "UPDATE roteiro"
+				+ " SET forma_pagamento = " + roteiro.getFormaPagamento()
 				+ " WHERE id = " + roteiro.getId() + ";";
 		execute(sql);
 	}

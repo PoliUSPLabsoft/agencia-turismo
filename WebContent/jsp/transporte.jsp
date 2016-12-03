@@ -19,7 +19,7 @@
 			<div class="content row">
 				<% List<Transporte> transportes = (List<Transporte>) request.getAttribute("transportes"); %>
 				<% if (transportes != null) {%>
-					<form action="Finalizar" method = "POST">
+					<form action="EscolheFormaPagamento" method = "POST">
 						<p>Total de <%=transportes.size()%> transportes</p>
 						<div class="col-sm-12 bloco_transporte">
 								<div class="col-sm-1 check"> Sel. </div>

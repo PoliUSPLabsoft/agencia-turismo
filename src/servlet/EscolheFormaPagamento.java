@@ -46,6 +46,7 @@ public class EscolheFormaPagamento extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RoteiroDAO roteiroDAO = new RoteiroDAO();
 		try {
+			Roteiro roteiro = new Roteiro();
 			roteiro.setCliente((Cliente) request.getSession().getAttribute("cliente"));
 			List<Cidade> cidades = (List<Cidade>) request.getSession().getAttribute("cidades");
 			roteiro.setCidades(cidades);
@@ -62,6 +63,7 @@ public class EscolheFormaPagamento extends HttpServlet {
 			roteiro.setCidadeNatal(cidadeNatal);
 			roteiroDAO.salvaRoteiro(roteiro);
 			
+			request.getSession().setAttribute("roteiro", roteiro);
 			request.setAttribute("roteiro", roteiro);
 			redirecionamento = "/jsp/mostrarRoteiro.jsp";
 		} catch (SQLException e) {
