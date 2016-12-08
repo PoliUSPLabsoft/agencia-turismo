@@ -25,8 +25,7 @@
 						<ul>
 							<li><a href="EscolheCidade">Criar roteiro</a></li>
 							<li><a href="VenderPacote">Vender pacote</a></li>
-							<li><a href="#"></a></li>
-							<li><a href="#"></a></li>
+							<li><a href="SugerirRoteiro">Sugerir roteiro</a></li>
 						</ul>
 					</nav>
 				</div>

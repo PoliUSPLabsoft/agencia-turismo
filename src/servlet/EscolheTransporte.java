@@ -59,6 +59,9 @@ public class EscolheTransporte extends HttpServlet {
 				String id_s = (String)request.getParameter(i+"");
 				int id = Integer.parseInt(id_s);
 				Hotel atual = hotelDAO.getHotelById(id);
+				String nDias = (String) request.getParameter("hotel " + i);
+				Integer n = Integer.parseInt(nDias);
+				atual.setNdias(n);
 				cidades.get(i).setHotel(atual);
 			}
 			cidades.add(cidades.size(), cidadeNatal);
@@ -67,7 +70,7 @@ public class EscolheTransporte extends HttpServlet {
 				transportes.addAll((Collection<Transporte>) transporteDAO.getTransportes(cidades.get(i-1).getId(), cidades.get(i).getId()));
 			request.setAttribute("transportes", transportes);
 			request.setAttribute("cidades", cidades);
-			redirecionamento = "/jsp/transporte.jsp";
+			redirecionamento = "/jsp/criarRoteiro/transporte.jsp";
 		} catch (SQLException e) {
 			e.printStackTrace();
 			request.setAttribute("stackTrace", e.getStackTrace());

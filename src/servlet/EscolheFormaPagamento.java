@@ -65,7 +65,7 @@ public class EscolheFormaPagamento extends HttpServlet {
 			
 			request.getSession().setAttribute("roteiro", roteiro);
 			request.setAttribute("roteiro", roteiro);
-			redirecionamento = "/jsp/mostrarRoteiro.jsp";
+			redirecionamento = "/jsp/criarRoteiro/mostrarRoteiro.jsp";
 		} catch (SQLException e) {
 			e.printStackTrace();
 			request.setAttribute("erro", e);

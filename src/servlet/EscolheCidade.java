@@ -45,7 +45,7 @@ public class EscolheCidade extends HttpServlet {
 			
 			if (cidades != null && cidades.size() > 0){
 				request.setAttribute("cidades", cidades);
-				redirecionamento = "/jsp/cidade.jsp";
+				redirecionamento = "/jsp/criarRoteiro/cidade.jsp";
 			} else
 				throw new SQLException("Nenhum resultado encontrado!!");
 		} catch (SQLException e) {

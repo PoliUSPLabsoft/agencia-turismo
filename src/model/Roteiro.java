@@ -12,6 +12,7 @@ import DAO.TransporteDAO;
 public class Roteiro implements Serializable {
 	private static final long serialVersionUID = -7121797199679360740L;
 	Integer id;
+	Integer nCidades;
 	Cliente cliente;
 	Cidade cidadeNatal;
 	List<Cidade> cidades;
@@ -29,6 +30,13 @@ public class Roteiro implements Serializable {
 		this.transportes = new ArrayList<>();
 	}
 	
+	public Roteiro(int id, String nome, int nCidades){
+		this();
+		this.setId(id);
+		this.setName(nome);
+		this.setnCidades(nCidades);
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -44,6 +52,15 @@ public class Roteiro implements Serializable {
 	public int getId() {
 		return id;
 	}
+	
+	public Integer getnCidades() {
+		return nCidades;
+	}
+
+	public void setnCidades(Integer nCidades) {
+		this.nCidades = nCidades;
+	}
+
 	public List<Cidade> getCidades() {
 		return cidades;
 	}
@@ -118,12 +135,15 @@ public class Roteiro implements Serializable {
 	}
 	
 	public int getPreco(){
-		int preco = 0;
-		for(Hotel hotel: hoteis)
-			preco += hotel.getPreco() * hotel.getNdias();
-		for (Transporte transporte: transportes)
-			preco += transporte.getPreco();		
-		return preco;
+		int i, preco = 0;
+		Cidade cidade;
+		for(i = 0; i < cidades.size(); i++){
+			cidade = cidades.get(i);
+			if (cidade.getHotel() != null)
+				preco += cidade.getHotel().getPreco() * cidade.getHotel().getNdias();
+			if (cidade.getPartida() != null)
+				preco += cidade.getPartida().getPreco();
+		} return preco;
 	}
 
 	public int getFormaPagamento() {

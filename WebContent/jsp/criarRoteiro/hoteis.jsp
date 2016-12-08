@@ -22,16 +22,36 @@
 				<% if (hoteis != null) {%>
 					<%Set<String> visitadas = new HashSet<String>(); %>
 					<form action="EscolheTransportes" method = "POST">
-						<% int i = 0, city = 0; %>
-						<%for (Hotel hotel: hoteis) {%>
-								<%if (city != hotel.getCidadeId()) {%>
-									<%city = hotel.getCidadeId(); %>
-									<%i++; %>
-									<h2><%=hotel.getCidade() %></h2>
-								<%} %>
-								<input type="radio" name = "<%=i %>" value = "<%=hotel.getId()%>">
-								<%=hotel.getNome() %><br>					
-						<%} %>
+						<table>
+							<% int i = 0, city = 0; %>
+							<%for (Hotel hotel: hoteis) {%>
+									<%if (city != hotel.getCidadeId()) {%>
+										<%city = hotel.getCidadeId(); %>
+										<%i++; %>
+										<tr>
+											<td colspan="5"><h2><%=hotel.getCidade() %></h2></td>
+										</tr>
+										<tr>
+											<td colspan="3"><label>Número de dias: </label></td>
+											<td colspan="2"><input type="text" name="hotel <%=i %>"></td>
+										</tr>
+										<tr>
+											<td></td>
+											<td>Nome</td>
+											<td>Avaliação</td>
+											<td>Descrição</td>
+											<td>Preço</td>
+										</tr>
+									<%} %>
+									<tr>
+										<td><input type="radio" name = "<%=i %>" value = "<%=hotel.getId()%>"></td>
+										<td><%=hotel.getNome() %></td>
+										<td><%=hotel.getAvaliacao() %></td>
+										<td><%=hotel.getDescricao() %></td>
+										<td>R$<%=hotel.getPreco() %>,00</td>	
+									</tr>				
+							<%} %>
+						</table>
 						<input type="submit" value = "OK">
 					</form>
 				<%} else {%>

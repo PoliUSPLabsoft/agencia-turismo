@@ -73,7 +73,7 @@ public class EscolheHotel extends HttpServlet {
 			request.getSession().setAttribute("hoteis", hoteis);			
 			request.setAttribute("hoteis", hoteis);
 			
-			redirecionamento = "/jsp/hoteis.jsp";
+			redirecionamento = "/jsp/criarRoteiro/hoteis.jsp";
 		} catch (SQLException e) {
 			e.printStackTrace();
 			request.setAttribute("erro", e);

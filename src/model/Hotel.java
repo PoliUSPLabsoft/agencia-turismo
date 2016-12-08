@@ -61,5 +61,9 @@ public class Hotel{
 	public Integer getNdias() {
 		return ndias;
 	}
+
+	public void setNdias(Integer ndias) {
+		this.ndias = ndias;
+	}
 	
 }

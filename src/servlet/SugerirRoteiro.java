@@ -2,7 +2,10 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,22 +14,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DAO.HotelDAO;
 import DAO.RoteiroDAO;
-import model.Cliente;
+import DAO.TransporteDAO;
+import model.Cidade;
 import model.Hotel;
 import model.Roteiro;
+import model.Transporte;
 
 /**
- * Servlet implementation class VenderRoteiro
+ * Servlet implementation class SugerirRoteiro
  */
-@WebServlet("/VenderPacote")
-public class VenderRoteiro extends HttpServlet {
+@WebServlet("/SugerirRoteiro")
+public class SugerirRoteiro extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	String redirecionamento;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public VenderRoteiro() {
+    public SugerirRoteiro() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,20 +42,12 @@ public class VenderRoteiro extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String redirecionamento;
-			
-		RoteiroDAO roteiroDAO = new RoteiroDAO();
-		
-		
 		try {
-			Cliente cliente = (Cliente) request.getSession().getAttribute("cliente");
-			List<Roteiro> roteiros = roteiroDAO.getRoteiros();
+			RoteiroDAO roteiroDAO = new RoteiroDAO();
+			Map<Integer, Roteiro> roteiros = roteiroDAO.getRoteiros();
 			
-			request.setAttribute("cliente", cliente);
 			request.setAttribute("roteiros", roteiros);
-			request.getSession().setAttribute("roteiros", roteiros);
-			
-			redirecionamento = "/jsp/fkVenderPacotes - EscolherPacote.jsp";
+			redirecionamento = "/jsp/sugerirRoteiro/roteiros.jsp";
 		} catch (SQLException e) {
 			e.printStackTrace();
 			request.setAttribute("erro", e);

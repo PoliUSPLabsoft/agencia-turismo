@@ -19,7 +19,7 @@
 	</nav>
 	<div class="container">
 		<p>
-			<%=((Exception)request.getAttribute("erro")).getMessage()%>
+			<%=((Exception)request.getAttribute("erro")).getStackTrace().toString()%>
 		</p>
 	</div>
 </body>

@@ -19,12 +19,14 @@
 		</nav>	
 		<div class="container">
 			<div class="content">
-				<%List<Roteiro> roteiros = ((List<Roteiro>) request.getSession().getAttribute("roteiros"));%>
+				<%Map<Integer, Roteiro> roteiros = (Map<Integer, Roteiro>) request.getAttribute("roteiros");%>
 				
 				<form action="MostrarRoteiro" method="POST">
 					<div class="list-group">
 				<% if (roteiros != null) {%>
-					<% for (Roteiro r: roteiros) { %>
+					<% for (int i = 0; i < roteiros.keySet().size(); i++) { %>
+						<%Roteiro r = roteiros.get(i);%>
+						
 						<h4 class="list-group-item-heading"><%= r.getName() %></h4>
     					<p class="list-group-item-text">  
     						<input type="radio" name="id" value="<%=r.getId()%>"/>
